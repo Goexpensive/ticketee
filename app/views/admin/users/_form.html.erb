@@ -1,0 +1,5 @@
+<%= simple_form_for([:admin, user]) do |form| %>
+  <%= form.input :email %>
+  <%= form.input :password %>
+  <%= form.button :submit, class: "btn btn-primary" %>
+<% end %>
