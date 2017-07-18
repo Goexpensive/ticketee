@@ -2,5 +2,6 @@
   <%= form.input :name %>
   <%= form.input :description %>
   <%= form.input :attachment, as: :file, label: "File" %>
+  <%= form.input :attachment_cache, as: :hidden %>
   <%= form.button :submit, class: "btn-primary" %>
 <% end %>
