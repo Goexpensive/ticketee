@@ -11,10 +11,13 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+  
   root "projects#index"
   
   resources :projects, only: [:index, :show, :edit, :update] do
     resources :tickets
   end
+
+  resources :attachments, only: [:show]
   
 end
