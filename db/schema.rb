@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728231509) do
+ActiveRecord::Schema.define(version: 20170907001010) do
 
   create_table "attachments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "file"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 20170728231509) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ticket_id"], name: "index_attachments_on_ticket_id"
+  end
+
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.text "text"
+    t.bigint "ticket_id"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_comments_on_author_id"
+    t.index ["ticket_id"], name: "index_comments_on_ticket_id"
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -68,6 +78,8 @@ ActiveRecord::Schema.define(version: 20170728231509) do
   end
 
   add_foreign_key "attachments", "tickets"
+  add_foreign_key "comments", "tickets"
+  add_foreign_key "comments", "users", column: "author_id"
   add_foreign_key "roles", "projects"
   add_foreign_key "roles", "users"
   add_foreign_key "tickets", "projects"
